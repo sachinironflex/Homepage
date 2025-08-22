@@ -49,19 +49,24 @@
             text-align: center;
             font-size: 2.5rem; /* Default font size */
             font-weight: 700;
-            color: var(--blue-glow);
+            /* Heading ka background laal, text kaala aur glow neela hai */
+            background-color: var(--red-glow);
+            color: var(--neon-black);
             text-shadow: 0 0 10px var(--blue-glow), 0 0 20px rgba(0, 191, 255, 0.5);
+            padding: 5px 10px; /* Text ke around padding */
+            border-radius: 5px;
             margin-bottom: 0; 
             animation: neonGlowBlue 1.5s ease-in-out infinite alternate;
         }
 
         .latest-updates {
             text-align: left;
-            font-size: 1.5rem; /* 'Latest Updates' ko bada kiya gaya hai */
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--white-text);
             text-shadow: 0 0 5px var(--red-glow), 0 0 10px rgba(255, 69, 0, 0.5);
-            margin-top: 1rem;
+            /* 'Latest Updates' ko thoda aur neeche kiya gaya hai */
+            margin-top: 1.5rem;
             margin-bottom: 2rem;
             padding: 8px 15px;
             background-color: rgba(255, 69, 0, 0.1);
@@ -170,8 +175,8 @@
                 font-size: 1.1rem;
             }
             .latest-updates {
-                font-size: 1.3rem; /* 'Latest Updates' ko aur bada kiya gaya hai */
-                margin-top: 0.5rem;
+                font-size: 1.3rem;
+                margin-top: 0.5rem; /* Mobile par 'Latest Updates' ko thoda aur neeche kiya gaya hai */
                 margin-bottom: 1.5rem;
                 padding: 6px 10px;
             }
