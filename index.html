@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -12,7 +13,6 @@
             --white-text: #ffffff;
             --blue-glow: #00bfff;
             --yellow-glow: #ffea00;
-            /* 'Latest Updates' के लिए लाल रंग */
             --red-glow: #ff4500;
         }
 
@@ -51,7 +51,7 @@
             font-weight: 700;
             color: var(--blue-glow);
             text-shadow: 0 0 10px var(--blue-glow), 0 0 20px rgba(0, 191, 255, 0.5);
-            margin-bottom: 0; 
+            margin-bottom: 0;
             animation: neonGlowBlue 1.5s ease-in-out infinite alternate;
         }
 
@@ -60,15 +60,12 @@
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--white-text);
-            /* 'Latest Updates' का टेक्स्ट शैडो अब लाल है */
             text-shadow: 0 0 5px var(--red-glow), 0 0 10px rgba(255, 69, 0, 0.5);
             margin-top: 1rem;
             margin-bottom: 2rem;
             padding: 8px 15px;
-            /* 'Latest Updates' का बैकग्राउंड अब हल्का लाल है */
             background-color: rgba(255, 69, 0, 0.1);
             border-radius: 5px;
-            /* यहाँ लाल ग्लो के लिए एनिमेशन जोड़ा गया है */
             animation: neonGlowRed 1.5s ease-in-out infinite alternate;
         }
 
@@ -77,7 +74,6 @@
             to { text-shadow: 0 0 15px var(--blue-glow), 0 0 30px rgba(0, 191, 255, 0.8); }
         }
 
-        /* लाल ग्लो के लिए नया एनिमेशन */
         @keyframes neonGlowRed {
             from { text-shadow: 0 0 5px var(--red-glow), 0 0 10px rgba(255, 69, 0, 0.5); }
             to { text-shadow: 0 0 8px var(--red-glow), 0 0 15px rgba(255, 69, 0, 0.8); }
@@ -110,7 +106,7 @@
             color: var(--white-text);
         }
 
-        .view-more-btn {
+        .view-more-btn, .back-to-list-btn {
             background-color: var(--yellow-glow);
             color: var(--neon-black);
             border: none;
@@ -122,11 +118,28 @@
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             box-shadow: 0 0 5px var(--yellow-glow), 0 0 10px rgba(255, 234, 0, 0.5);
         }
-
-        .view-more-btn:hover {
-            background-color: #ffe600;
+        
+        /* 'वापस जाएँ' बटन के लिए नीले रंग की स्टाइलिंग */
+        .back-to-list-btn {
+            background-color: var(--blue-glow);
+            color: var(--neon-black);
+            box-shadow: 0 0 5px var(--blue-glow), 0 0 10px rgba(0, 191, 255, 0.5);
+            margin-top: 20px; /* आर्टिकल से थोड़ी जगह */
+            display: block; /* पूरी चौड़ाई में */
+        }
+        
+        .view-more-btn:hover, .back-to-list-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 10px var(--yellow-glow), 0 0 20px rgba(255, 234, 0, 0.8);
+        }
+        
+        .view-more-btn:hover {
+             background-color: #ffe600;
+             box-shadow: 0 0 10px var(--yellow-glow), 0 0 20px rgba(255, 234, 0, 0.8);
+        }
+        
+        .back-to-list-btn:hover {
+             background-color: #00c8ff;
+             box-shadow: 0 0 10px var(--blue-glow), 0 0 20px rgba(0, 191, 255, 0.8);
         }
 
         .full-article-container {
@@ -147,6 +160,39 @@
         .full-article-container p {
             color: var(--white-text);
             font-size: 1.1rem;
+        }
+
+        /* Mobile friendly adjustments */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .latest-updates {
+                font-size: 1rem;
+                margin-top: 0.5rem;
+                margin-bottom: 1.5rem;
+            }
+            .news-item {
+                padding: 15px;
+            }
+            .news-item h3 {
+                font-size: 1.3rem;
+            }
+            .news-item p {
+                font-size: 0.9rem;
+            }
+            .view-more-btn, .back-to-list-btn {
+                padding: 8px 16px;
+            }
+            .full-article-container {
+                padding: 15px;
+            }
+            .full-article-container h2 {
+                font-size: 1.8rem;
+            }
+            .full-article-container p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -184,6 +230,8 @@
         <div id="full-article-container" class="full-article-container">
             <h2 id="article-title"></h2>
             <p id="article-content"></p>
+            <!-- नया 'वापस जाएँ' बटन यहाँ जोड़ा गया है -->
+            <button id="back-to-list-btn" class="back-to-list-btn">वापस जाएँ</button>
         </div>
     </div>
 
@@ -217,6 +265,7 @@
         const articleContent = document.getElementById('article-content');
         const mainHeading = document.getElementById('main-heading');
         const latestUpdatesText = document.getElementById('latest-updates-text');
+        const backButton = document.getElementById('back-to-list-btn'); // नया बटन सेलेक्ट करें
 
         function showArticle(id) {
             newsListContainer.style.display = 'none';
@@ -229,7 +278,7 @@
 
             fullArticleContainer.style.display = 'block';
 
-            history.pushState({ state: 'article', id: id }, data.title, `?news=${id}`);
+            history.pushState({ state: 'article', id: id }, '', '');
         }
 
         function showNewsList() {
@@ -247,6 +296,12 @@
                 showArticle(id);
             });
         });
+        
+        // नए 'वापस जाएँ' बटन के लिए इवेंट लिसनर
+        backButton.addEventListener('click', () => {
+             history.back();
+        });
+
 
         window.addEventListener('popstate', (event) => {
             if (event.state && event.state.state === 'article') {
@@ -264,7 +319,7 @@
             } else {
                 showNewsList();
             }
-            history.replaceState({ state: 'list' }, 'SGS EXAM CRACKER', window.location.pathname);
+            history.replaceState({ state: 'list' }, '', '');
         });
     </script>
 </body>
