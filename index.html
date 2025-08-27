@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SGS EXAM CRACKER</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
@@ -14,6 +14,7 @@
             --blue-glow: #00bfff;
             --yellow-glow: #ffea00;
             --red-glow: #ff4500;
+            --button-bg: #222;
         }
 
         body {
@@ -21,10 +22,10 @@
             background-color: var(--neon-black);
             color: var(--white-text);
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             min-height: 100vh;
             box-sizing: border-box;
             line-height: 1.6;
@@ -45,15 +46,195 @@
             to { opacity: 1; }
         }
 
+        /* --- Header Styling --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white-text);
+            text-shadow: 0 0 5px var(--blue-glow);
+            margin: 0;
+        }
+        
+        .profile-pic-container {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--blue-glow);
+            object-fit: cover;
+        }
+
+        .logout-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background-color: rgba(30, 30, 30, 0.95);
+            border: 2px solid var(--blue-glow);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            display: none;
+            flex-direction: column;
+            padding: 10px;
+            z-index: 100;
+            min-width: 120px;
+        }
+
+        .logout-dropdown.show {
+            display: flex;
+        }
+
+        .logout-btn {
+            background-color: transparent;
+            color: var(--white-text);
+            border: 1px solid var(--red-glow);
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background-color: rgba(255, 69, 0, 0.2);
+        }
+
+        /* --- Login/Signup Form --- */
+        .auth-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .auth-form {
+            width: 100%;
+            display: none; /* Initial state */
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .auth-form.active {
+            display: flex;
+        }
+        
+        .auth-form input {
+            background-color: #333;
+            border: 1px solid var(--blue-glow);
+            color: var(--white-text);
+            padding: 0.75rem;
+            border-radius: 8px;
+            width: 100%;
+            transition: border-color 0.3s;
+        }
+
+        .auth-form input:focus {
+            outline: none;
+            border-color: var(--yellow-glow);
+        }
+        
+        .auth-form button, .google-btn {
+            padding: 0.75rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        
+        .auth-form button {
+            background-color: var(--blue-glow);
+            color: var(--neon-black);
+        }
+
+        .auth-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 191, 255, 0.5);
+        }
+
+        .google-btn {
+            background-color: #4285F4;
+            color: var(--white-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .google-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.5);
+        }
+        
+        .google-btn img {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        .auth-tab {
+            flex-grow: 1;
+            padding: 0.75rem;
+            text-align: center;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            color: rgba(255, 255, 255, 0.6);
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .auth-tab.active {
+            border-color: var(--blue-glow);
+            color: var(--white-text);
+        }
+        
+        /* Message Box */
+        .message-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--yellow-glow);
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--yellow-glow);
+        }
+
+        /* --- Main Content Styling --- */
         h1 {
             text-align: center;
-            font-size: 2.5rem; /* Default font size */
+            font-size: 2.5rem;
             font-weight: 700;
-            /* Heading ka background laal, text kaala aur glow neela hai */
             background-color: var(--red-glow);
             color: var(--neon-black);
             text-shadow: 0 0 10px var(--blue-glow), 0 0 20px rgba(0, 191, 255, 0.5);
-            padding: 5px 10px; /* Text ke around padding */
+            padding: 5px 10px;
             border-radius: 5px;
             margin-bottom: 0; 
             animation: neonGlowBlue 1.5s ease-in-out infinite alternate;
@@ -65,7 +246,6 @@
             font-weight: 700;
             color: var(--white-text);
             text-shadow: 0 0 5px var(--red-glow), 0 0 10px rgba(255, 69, 0, 0.5);
-            /* 'Latest Updates' ko thoda aur neeche kiya gaya hai */
             margin-top: 1.5rem;
             margin-bottom: 2rem;
             padding: 8px 15px;
@@ -83,7 +263,43 @@
             from { text-shadow: 0 0 5px var(--red-glow), 0 0 10px rgba(255, 69, 0, 0.5); }
             to { text-shadow: 0 0 8px var(--red-glow), 0 0 15px rgba(255, 69, 0, 0.8); }
         }
+        
+        /* --- Buttons Grid --- */
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
 
+        .grid-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            background: var(--button-bg);
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            color: var(--white-text);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            border: 2px solid var(--blue-glow);
+            box-shadow: 0 0 10px var(--blue-glow);
+        }
+
+        .grid-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--blue-glow);
+        }
+
+        .grid-button:active {
+            transform: scale(0.98);
+        }
+        
         .news-item {
             background-color: rgba(40, 40, 40, 0.6);
             padding: 20px;
@@ -132,10 +348,6 @@
             display: block;
         }
         
-        .view-more-btn:hover, .back-to-list-btn:hover {
-            transform: scale(1.05);
-        }
-        
         .view-more-btn:hover {
              background-color: #ffe600;
              box-shadow: 0 0 10px var(--yellow-glow), 0 0 20px rgba(255, 234, 0, 0.8);
@@ -169,14 +381,17 @@
         /* Mobile friendly adjustments */
         @media (max-width: 600px) {
             .container {
-                padding: 1.5rem;
+                padding: 1rem;
+            }
+            .auth-container {
+                padding: 1rem;
             }
             h1 {
                 font-size: 1.1rem;
             }
             .latest-updates {
                 font-size: 1.3rem;
-                margin-top: 0.5rem; /* Mobile par 'Latest Updates' ko thoda aur neeche kiya gaya hai */
+                margin-top: 0.5rem;
                 margin-bottom: 1.5rem;
                 padding: 6px 10px;
             }
@@ -202,37 +417,69 @@
             .full-article-container p {
                 font-size: 0.9rem;
             }
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Main UI Container, hidden until login -->
+    <div id="main-content" class="container hidden" style="display: none;">
+        <!-- Header for logged-in users -->
+        <div class="header">
+            <div class="user-info">
+                <h2>Hello 👋 <span id="user-name"></span></h2>
+            </div>
+            <div class="profile-pic-container">
+                <img id="user-photo" class="profile-pic" src="https://placehold.co/50x50/333/fff?text=User" alt="User Photo">
+                <div id="logout-dropdown" class="logout-dropdown">
+                    <button id="logout-btn" class="logout-btn">Log Out</button>
+                </div>
+            </div>
+        </div>
+
         <h1 id="main-heading">SGS EXAM CRACKER</h1>
-        <div class="latest-updates" id="latest-updates-text">Latest Updates</div>
-
-        <div id="news-list-container">
-            <div class="news-item" data-id="0">
-                <h3>SSC CGL 2024: अधिसूचना जारी, परीक्षा की तिथि घोषित</h3>
-                <p>कर्मचारी चयन आयोग (SSC) ने CGL 2024 परीक्षा के लिए अधिसूचना जारी कर दी है।...</p>
-                <button class="view-more-btn">और देखें</button>
+        
+        <!-- Button Grid -->
+        <div id="button-grid-container">
+            <div class="button-grid">
+                <a href="#" class="grid-button" data-action="showUpdates">Latest Update</a>
+                <a href="https://sachinironflex.github.io/sscgd/" target="_blank" class="grid-button">SSC GD</a>
+                <a href="https://sachinironflex.github.io/SGS-STORER/" target="_blank" class="grid-button">Lucent</a>
+                <a href="https://sachinironflex.github.io/allpdf/" target="_blank" class="grid-button">Combined Pdf</a>
+                <a href="#" class="grid-button">E books</a>
+                <a href="#" class="grid-button">Weekly Test</a>
+                <a href="#" class="grid-button">GD Test series</a>
+                <a href="#" class="grid-button">General Knowledge Test</a>
+                <a href="#" class="grid-button">Hindi Test</a>
             </div>
+        </div>
 
-            <div class="news-item" data-id="1">
-                <h3>UPSC सिविल सेवा 2025: प्रारंभिक परीक्षा का सिलेबस</h3>
-                <p>संघ लोक सेवा आयोग (UPSC) ने 2025 की सिविल सेवा परीक्षा के लिए सिलेबस में बदलाव किया है।...</p>
-                <button class="view-more-btn">और देखें</button>
-            </div>
-
-            <div class="news-item" data-id="2">
-                <h3>बैंकिंग परीक्षा: IBPS PO 2024 के लिए आवेदन शुरू</h3>
-                <p>बैंकिंग कार्मिक चयन संस्थान (IBPS) ने प्रोबेशनरी ऑफिसर (PO) 2024 के लिए आवेदन प्रक्रिया शुरू कर दी है।...</p>
-                <button class="view-more-btn">और देखें</button>
-            </div>
-
-            <div class="news-item" data-id="3">
-                <h3>रेलवे भर्ती बोर्ड (RRB): ग्रुप D परीक्षा 2024 की अपडेट्स</h3>
-                <p>रेलवे भर्ती बोर्ड ने ग्रुप D की परीक्षा तिथि और एडमिट कार्ड जारी करने की घोषणा की है।...</p>
-                <button class="view-more-btn">और देखें</button>
+        <!-- Latest Updates Section (hidden by default) -->
+        <div id="updates-section" style="display: none;">
+            <div class="latest-updates" id="latest-updates-text">Latest Updates</div>
+            <div id="news-list-container">
+                <div class="news-item" data-id="0">
+                    <h3>SSC CGL 2024: अधिसूचना जारी, परीक्षा की तिथि घोषित</h3>
+                    <p>कर्मचारी चयन आयोग (SSC) ने CGL 2024 परीक्षा के लिए अधिसूचना जारी कर दी है।...</p>
+                    <button class="view-more-btn">और देखें</button>
+                </div>
+                <div class="news-item" data-id="1">
+                    <h3>UPSC सिविल सेवा 2025: प्रारंभिक परीक्षा का सिलेबस</h3>
+                    <p>संघ लोक सेवा आयोग (UPSC) ने 2025 की सिविल सेवा परीक्षा के लिए सिलेबस में बदलाव किया है।...</p>
+                    <button class="view-more-btn">और देखें</button>
+                </div>
+                <div class="news-item" data-id="2">
+                    <h3>बैंकिंग परीक्षा: IBPS PO 2024 के लिए आवेदन शुरू</h3>
+                    <p>बैंकिंग कार्मिक चयन संस्थान (IBPS) ने प्रोबेशनरी ऑफिसर (PO) 2024 के लिए आवेदन प्रक्रिया शुरू कर दी है।...</p>
+                    <button class="view-more-btn">और देखें</button>
+                </div>
+                <div class="news-item" data-id="3">
+                    <h3>रेलवे भर्ती बोर्ड (RRB): ग्रुप D परीक्षा 2024 की अपडेट्स</h3>
+                    <p>रेलवे भर्ती बोर्ड ने ग्रुप D की परीक्षा तिथि और एडमिट कार्ड जारी करने की घोषणा की है।...</p>
+                    <button class="view-more-btn">और देखें</button>
+                </div>
             </div>
         </div>
 
@@ -242,12 +489,138 @@
             <button id="back-to-list-btn" class="back-to-list-btn">वापस जाएँ</button>
         </div>
     </div>
+    
+    <!-- Login/Signup UI Container -->
+    <div id="auth-container" class="auth-container">
+        <h1 class="text-2xl font-bold mb-4">SGS EXAM CRACKER</h1>
+        <div class="auth-tabs">
+            <div class="auth-tab active" data-tab="signin">Sign In</div>
+            <div class="auth-tab" data-tab="signup">Sign Up</div>
+            <div class="auth-tab" data-tab="forgot-password">Forgot Password</div>
+        </div>
+        
+        <!-- Sign In Form -->
+        <div id="signin-form" class="auth-form active">
+            <input type="email" id="signin-email" placeholder="Email" required>
+            <input type="password" id="signin-password" placeholder="Password" required>
+            <button id="signin-btn">Sign In</button>
+            <button id="google-signin-btn" class="google-btn">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google icon">
+                Sign in with Google
+            </button>
+        </div>
+        
+        <!-- Sign Up Form -->
+        <div id="signup-form" class="auth-form">
+            <input type="email" id="signup-email" placeholder="Email" required>
+            <input type="password" id="signup-password" placeholder="Password" required>
+            <button id="signup-btn">Sign Up</button>
+        </div>
+        
+        <!-- Forgot Password Form -->
+        <div id="forgot-password-form" class="auth-form">
+            <input type="email" id="forgot-email" placeholder="Email" required>
+            <button id="reset-password-btn">Reset Password</button>
+        </div>
+        
+        <!-- Message Box -->
+        <div id="message-box" class="message-box" style="display: none;"></div>
+    </div>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword, 
+            createUserWithEmailAndPassword, 
+            signOut,
+            onAuthStateChanged,
+            GoogleAuthProvider,
+            signInWithPopup,
+            sendPasswordResetEmail,
+            signInAnonymously,
+            signInWithCustomToken
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        
+        // Firebase Config from User
+        const firebaseConfig = {
+          apiKey: "AIzaSyAYyEHrGV1Ev1FaMO5U3qkHUmdNEHP_IX8",
+          authDomain: "sgs-study-hub.firebaseapp.com",
+          databaseURL: "https://sgs-study-hub-default-rtdb.firebaseio.com",
+          projectId: "sgs-study-hub",
+          storageBucket: "sgs-study-hub.firebasestorage.app",
+          messagingSenderId: "299932841646",
+          appId: "1:299932841646:web:21120e316a9b3134a1df3f"
+        };
+        
+        // --- Canvas Environment Variables & Firebase Initialization ---
+        // Canvas environment se milne wale global variables
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfigFromCanvas = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : firebaseConfig;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        
+        // Firebase ko initialize karna
+        const app = initializeApp(firebaseConfigFromCanvas);
+        const auth = getAuth(app);
+        
+        // Ek baar hi sign-in karne ke liye flag
+        let isSigningIn = false;
 
-    <script>
+        // initialAuthToken se sign-in karein
+        async function signInWithToken() {
+            if (isSigningIn) return;
+            isSigningIn = true;
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Firebase sign-in failed:", error);
+            } finally {
+                isSigningIn = false;
+            }
+        }
+        
+        // --- DOM Elements ---
+        const authContainer = document.getElementById('auth-container');
+        const mainContent = document.getElementById('main-content');
+        const userNameSpan = document.getElementById('user-name');
+        const userPhotoImg = document.getElementById('user-photo');
+        const logoutDropdown = document.getElementById('logout-dropdown');
+        const profilePicContainer = document.querySelector('.profile-pic-container');
+        const logoutBtn = document.getElementById('logout-btn');
+        const messageBox = document.getElementById('message-box');
+
+        const authTabs = document.querySelectorAll('.auth-tab');
+        const signinForm = document.getElementById('signin-form');
+        const signupForm = document.getElementById('signup-form');
+        const forgotPasswordForm = document.getElementById('forgot-password-form');
+        
+        const signinEmailInput = document.getElementById('signin-email');
+        const signinPasswordInput = document.getElementById('signin-password');
+        const signinButton = document.getElementById('signin-btn');
+        const googleSigninButton = document.getElementById('google-signin-btn');
+        const signupEmailInput = document.getElementById('signup-email');
+        const signupPasswordInput = document.getElementById('signup-password');
+        const signupButton = document.getElementById('signup-btn');
+        const forgotEmailInput = document.getElementById('forgot-email');
+        const resetPasswordButton = document.getElementById('reset-password-btn');
+
+        // --- Content Sections ---
+        const buttonGridContainer = document.getElementById('button-grid-container');
+        const updatesSection = document.getElementById('updates-section');
+        const fullArticleContainer = document.getElementById('full-article-container');
+        const articleTitle = document.getElementById('article-title');
+        const articleContent = document.getElementById('article-content');
+        const backButton = document.getElementById('back-to-list-btn');
+        
+        // Data for news
         const newsData = [
             {
                 title: "SSC CGL 2024: अधिसूचना जारी, परीक्षा की तिथि घोषित",
-                snippet: "कर्मचारी चयन आयोग (SSC) ने CGL 2024 परीक्षा के लिए अधिसूचना जारी कर दी है। इसमें रिक्तियों की संख्या, पात्रता मानदंड और परीक्षा की महत्वपूर्ण तिथियों का विवरण शामिल है। उम्मीदवार आधिकारिक वेबसाइट पर जाकर पूरी जानकारी देख सकते हैं।",
+                snippet: "कर्मचारी चयन आयोग (SSC) ने CGL 2024 परीक्षा के लिए अधिसूचना जारी कर दी है।...",
                 fullContent: "कर्मचारी चयन आयोग (SSC) ने संयुक्त स्नातक स्तरीय (CGL) परीक्षा 2024 के लिए बहुप्रतीक्षित अधिसूचना जारी कर दी है। इस वर्ष, आयोग ने 7,500 से अधिक रिक्तियों की घोषणा की है, जिसमें विभिन्न मंत्रालयों और सरकारी विभागों में ग्रुप 'B' और 'C' के पद शामिल हैं। ऑनलाइन आवेदन प्रक्रिया 15 जुलाई से शुरू होकर 14 अगस्त तक चलेगी। परीक्षा की संभावित तिथि अक्टूबर 2024 है। उम्मीदवारों को सलाह दी जाती है कि वे नवीनतम अपडेट के लिए नियमित रूप से SSC की वेबसाइट देखें."
             },
             {
@@ -267,72 +640,185 @@
             }
         ];
 
-        const newsListContainer = document.getElementById('news-list-container');
-        const fullArticleContainer = document.getElementById('full-article-container');
-        const articleTitle = document.getElementById('article-title');
-        const articleContent = document.getElementById('article-content');
-        const mainHeading = document.getElementById('main-heading');
-        const latestUpdatesText = document.getElementById('latest-updates-text');
-        const backButton = document.getElementById('back-to-list-btn');
+        // Functions to show/hide sections
+        function showButtonsOnly() {
+            buttonGridContainer.style.display = 'block';
+            updatesSection.style.display = 'none';
+            fullArticleContainer.style.display = 'none';
+        }
 
-        function showArticle(id) {
-            newsListContainer.style.display = 'none';
-            mainHeading.style.display = 'none';
-            latestUpdatesText.style.display = 'none';
+        function showUpdatesSection() {
+            buttonGridContainer.style.display = 'none';
+            updatesSection.style.display = 'block';
+            fullArticleContainer.style.display = 'none';
+        }
 
+        function showFullArticle(id) {
+            buttonGridContainer.style.display = 'none';
+            updatesSection.style.display = 'none';
+            fullArticleContainer.style.display = 'block';
+            
             const data = newsData[id];
             articleTitle.textContent = data.title;
             articleContent.textContent = data.fullContent;
-
-            fullArticleContainer.style.display = 'block';
-
-            history.pushState({ state: 'article', id: id }, '', '');
         }
 
-        function showNewsList() {
-            fullArticleContainer.style.display = 'none';
-
-            newsListContainer.style.display = 'block';
-            mainHeading.style.display = 'block';
-            latestUpdatesText.style.display = 'block';
+        function showAuthUI() {
+            authContainer.style.display = 'flex';
+            mainContent.style.display = 'none';
         }
+
+        function showMainUI(user) {
+            authContainer.style.display = 'none';
+            mainContent.style.display = 'block';
+            
+            const displayName = user.displayName || user.email;
+            userNameSpan.textContent = displayName.split('@')[0];
+            userPhotoImg.src = user.photoURL || 'https://placehold.co/50x50/333/fff?text=' + displayName.charAt(0).toUpperCase();
+            
+            // By default, show only buttons after login
+            showButtonsOnly();
+        }
+        
+        function showMessage(message) {
+            messageBox.textContent = message;
+            messageBox.style.display = 'block';
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+            }, 5000);
+        }
+
+        // --- Authentication Functions ---
+        const handleSignIn = async () => {
+            const email = signinEmailInput.value;
+            const password = signinPasswordInput.value;
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (error) {
+                showMessage(`Sign-in failed: ${error.message}`);
+            }
+        };
+
+        const handleSignUp = async () => {
+            const email = signupEmailInput.value;
+            const password = signupPasswordInput.value;
+            try {
+                await createUserWithEmailAndPassword(auth, email, password);
+                showMessage("Sign-up successful! You can now sign in.");
+            } catch (error) {
+                showMessage(`Sign-up failed: ${error.message}`);
+            }
+        };
+
+        const handleGoogleSignIn = async () => {
+            const provider = new GoogleAuthProvider();
+            try {
+                await signInWithPopup(auth, provider);
+            } catch (error) {
+                showMessage(`Google Sign-in failed: ${error.message}`);
+            }
+        };
+
+        const handlePasswordReset = async () => {
+            const email = forgotEmailInput.value;
+            if (!email) {
+                showMessage("Please enter your email address.");
+                return;
+            }
+            try {
+                await sendPasswordResetEmail(auth, email);
+                showMessage("Password reset email sent! Check your inbox.");
+            } catch (error) {
+                showMessage(`Password reset failed: ${error.message}`);
+            }
+        };
+
+        const handleSignOut = async () => {
+            try {
+                await signOut(auth);
+                showMessage("You have been logged out.");
+            } catch (error) {
+                showMessage(`Logout failed: ${error.message}`);
+            }
+        };
+
+        // --- Event Listeners ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                showMainUI(user);
+            } else {
+                showAuthUI();
+            }
+        });
+        
+        authTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                authTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                signinForm.classList.remove('active');
+                signupForm.classList.remove('active');
+                forgotPasswordForm.classList.remove('active');
+
+                const targetTab = tab.getAttribute('data-tab');
+                document.getElementById(targetTab + '-form').classList.add('active');
+            });
+        });
+        
+        signinButton.addEventListener('click', handleSignIn);
+        googleSigninButton.addEventListener('click', handleGoogleSignIn);
+        signupButton.addEventListener('click', handleSignUp);
+        resetPasswordButton.addEventListener('click', handlePasswordReset);
+        
+        profilePicContainer.addEventListener('click', () => {
+            logoutDropdown.classList.toggle('show');
+        });
+        
+        logoutBtn.addEventListener('click', handleSignOut);
+        
+        // Button Grid clicks
+        document.querySelectorAll('.grid-button').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const action = event.currentTarget.getAttribute('data-action');
+                if (action === 'showUpdates') {
+                    event.preventDefault(); 
+                    showUpdatesSection();
+                    // Add state to browser history for 'Latest Updates'
+                    history.pushState({ page: 'updates' }, '', 'updates');
+                }
+            });
+        });
 
         document.querySelectorAll('.view-more-btn').forEach(button => {
             button.addEventListener('click', (event) => {
                 const newsItem = event.target.closest('.news-item');
                 const id = newsItem.getAttribute('data-id');
-                showArticle(id);
+                showFullArticle(id);
+                // Add state to browser history for a specific article
+                history.pushState({ page: 'article', id: id }, '', 'article-' + id);
             });
         });
         
+        // The 'Vapas Jayein' button now goes back one step in history
         backButton.addEventListener('click', () => {
              history.back();
         });
 
-
+        // Handle browser back/forward history
         window.addEventListener('popstate', (event) => {
-            if (event.state && event.state.state === 'article') {
-                showArticle(event.state.id);
+            if (event.state && event.state.page === 'updates') {
+                showUpdatesSection();
+            } else if (event.state && event.state.page === 'article') {
+                showFullArticle(event.state.id);
             } else {
-                showNewsList();
+                showButtonsOnly();
             }
         });
+        
+        window.onload = function () {
+            signInWithToken();
+        };
 
-        window.addEventListener('load', () => {
-            const params = new URLSearchParams(window.location.search);
-            const newsId = params.get('news');
-            if (newsId !== null) {
-                showArticle(newsId);
-            } else {
-                showNewsList();
-            }
-            history.replaceState({ state: 'list' }, '', '');
-        });
-    
     </script>
-<script>
-  // Set current year automatically
-  document.getElementById("currentYear").textContent = new Date().getFullYear();
-</script>
 </body>
 </html>
