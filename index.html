@@ -290,6 +290,12 @@
             border: 2px solid var(--blue-glow);
             box-shadow: 0 0 10px var(--blue-glow);
         }
+        
+        /* Highlight for new links */
+        .highlight-link {
+            border: 2px solid var(--yellow-glow) !important;
+            box-shadow: 0 0 10px var(--yellow-glow) !important;
+        }
 
         .grid-button:hover {
             transform: scale(1.05);
@@ -444,49 +450,24 @@
         <!-- Button Grid -->
         <div id="button-grid-container">
             <div class="button-grid">
-                <a href="#" class="grid-button" data-action="showUpdates">Latest Update</a>
                 <a href="https://sachinironflex.github.io/sscgd/" target="_blank" class="grid-button">SSC GD</a>
                 <a href="https://sachinironflex.github.io/SGS-STORER/" target="_blank" class="grid-button">Lucent</a>
                 <a href="https://sachinironflex.github.io/allpdf/" target="_blank" class="grid-button">Combined Pdf</a>
-                <a href="#" class="grid-button">E books</a>
-                <a href="#" class="grid-button">Weekly Test</a>
-                <a href="#" class="grid-button">GD Test series</a>
-                <a href="#" class="grid-button">General Knowledge Test</a>
-                <a href="#" class="grid-button">Hindi Test</a>
+                <a href="https://www.example.com/ebooks" target="_blank" class="grid-button highlight-link">E books</a>
+                <a href="https://www.example.com/weekly-test" target="_blank" class="grid-button highlight-link">Weekly Test</a>
+                <a href="https://sachinironflex.github.io/Sscgdtest2026/#%7B%22page%22%3A%22home%22%2C%22data%22%3A%7B%7D%7D" target="_blank" class="grid-button highlight-link">GD Test series</a>
+                <a href="https://www.example.com/gk-test" target="_blank" class="grid-button highlight-link">General Knowledge Test</a>
+                <a href="https://www.example.com/hindi-test" target="_blank" class="grid-button highlight-link">Hindi Test</a>
             </div>
         </div>
 
         <!-- Latest Updates Section (hidden by default) -->
         <div id="updates-section" style="display: none;">
-            <div class="latest-updates" id="latest-updates-text">Latest Updates</div>
-            <div id="news-list-container">
-                <div class="news-item" data-id="0">
-                    <h3>SSC CGL 2024: अधिसूचना जारी, परीक्षा की तिथि घोषित</h3>
-                    <p>कर्मचारी चयन आयोग (SSC) ने CGL 2024 परीक्षा के लिए अधिसूचना जारी कर दी है।...</p>
-                    <button class="view-more-btn">और देखें</button>
-                </div>
-                <div class="news-item" data-id="1">
-                    <h3>UPSC सिविल सेवा 2025: प्रारंभिक परीक्षा का सिलेबस</h3>
-                    <p>संघ लोक सेवा आयोग (UPSC) ने 2025 की सिविल सेवा परीक्षा के लिए सिलेबस में बदलाव किया है।...</p>
-                    <button class="view-more-btn">और देखें</button>
-                </div>
-                <div class="news-item" data-id="2">
-                    <h3>बैंकिंग परीक्षा: IBPS PO 2024 के लिए आवेदन शुरू</h3>
-                    <p>बैंकिंग कार्मिक चयन संस्थान (IBPS) ने प्रोबेशनरी ऑफिसर (PO) 2024 के लिए आवेदन प्रक्रिया शुरू कर दी है।...</p>
-                    <button class="view-more-btn">और देखें</button>
-                </div>
-                <div class="news-item" data-id="3">
-                    <h3>रेलवे भर्ती बोर्ड (RRB): ग्रुप D परीक्षा 2024 की अपडेट्स</h3>
-                    <p>रेलवे भर्ती बोर्ड ने ग्रुप D की परीक्षा तिथि और एडमिट कार्ड जारी करने की घोषणा की है।...</p>
-                    <button class="view-more-btn">और देखें</button>
-                </div>
-            </div>
+            <!-- This section is now hidden and serves no purpose, but has been kept to maintain the original structure. -->
         </div>
 
         <div id="full-article-container" class="full-article-container">
-            <h2 id="article-title"></h2>
-            <p id="article-content"></p>
-            <button id="back-to-list-btn" class="back-to-list-btn">वापस जाएँ</button>
+             <!-- This section is now hidden and serves no purpose, but has been kept to maintain the original structure. -->
         </div>
     </div>
     
@@ -612,55 +593,12 @@
         const buttonGridContainer = document.getElementById('button-grid-container');
         const updatesSection = document.getElementById('updates-section');
         const fullArticleContainer = document.getElementById('full-article-container');
-        const articleTitle = document.getElementById('article-title');
-        const articleContent = document.getElementById('article-content');
-        const backButton = document.getElementById('back-to-list-btn');
         
-        // Data for news
-        const newsData = [
-            {
-                title: "SSC CGL 2024: अधिसूचना जारी, परीक्षा की तिथि घोषित",
-                snippet: "कर्मचारी चयन आयोग (SSC) ने CGL 2024 परीक्षा के लिए अधिसूचना जारी कर दी है।...",
-                fullContent: "कर्मचारी चयन आयोग (SSC) ने संयुक्त स्नातक स्तरीय (CGL) परीक्षा 2024 के लिए बहुप्रतीक्षित अधिसूचना जारी कर दी है। इस वर्ष, आयोग ने 7,500 से अधिक रिक्तियों की घोषणा की है, जिसमें विभिन्न मंत्रालयों और सरकारी विभागों में ग्रुप 'B' और 'C' के पद शामिल हैं। ऑनलाइन आवेदन प्रक्रिया 15 जुलाई से शुरू होकर 14 अगस्त तक चलेगी। परीक्षा की संभावित तिथि अक्टूबर 2024 है। उम्मीदवारों को सलाह दी जाती है कि वे नवीनतम अपडेट के लिए नियमित रूप से SSC की वेबसाइट देखें."
-            },
-            {
-                title: "UPSC सिविल सेवा 2025: प्रारंभिक परीक्षा का सिलेबस",
-                snippet: "संघ लोक सेवा आयोग (UPSC) ने 2025 की सिविल सेवा परीक्षा के लिए सिलेबस में कुछ छोटे बदलाव किए हैं। इन बदलावों का उद्देश्य उम्मीदवारों की विश्लेषणात्मक क्षमता का परीक्षण करना है.",
-                fullContent: "संघ लोक सेवा आयोग (UPSC) ने 2025 की सिविल सेवा परीक्षा (CSE) के लिए आधिकारिक सिलेबस जारी कर दिया है। प्रारंभिक परीक्षा के सामान्य अध्ययन पेपर-I और पेपर-II (CSAT) दोनों में कुछ मामूली संशोधन किए गए हैं। नए सिलेबस में करंट अफेयर्स, भारतीय राजनीति, भूगोल और अर्थव्यवस्था जैसे विषयों पर अधिक ध्यान केंद्रित किया गया है। आयोग ने यह भी स्पष्ट किया है कि CSAT पेपर में योग्यता के सवालों को और अधिक प्रासंगिक बनाया जाएगा। उम्मीदवारों को सलाह दी जाती है कि वे अपनी तैयारी को नए सिलेबस के अनुसार ही करें."
-            },
-            {
-                title: "बैंकिंग परीक्षा: IBPS PO 2024 के लिए आवेदन शुरू",
-                snippet: "बैंकिंग कार्मिक चयन संस्थान (IBPS) ने प्रोबेशनरी ऑफिसर (PO) 2024 के लिए आवेदन प्रक्रिया शुरू कर दी है। उम्मीदवार 15 सितंबर तक आवेदन कर सकते हैं.",
-                fullContent: "बैंकिंग कार्मिक चयन संस्थान (IBPS) ने प्रोबेशनरी ऑफिसर (PO) 2024 के लिए अधिसूचना जारी कर दी है। इस वर्ष, 4,500 से अधिक पदों के लिए भर्ती की जाएगी। आवेदन प्रक्रिया 15 अगस्त को शुरू हुई और 15 सितंबर को समाप्त होगी। प्रारंभिक परीक्षा अक्टूबर में और मुख्य परीक्षा नवंबर में आयोजित होने की संभावना है। इस परीक्षा के लिए स्नातक पास उम्मीदवार आवेदन कर सकते हैं। IBPS ने अपनी वेबसाइट पर परीक्षा का पूरा शेड्यूल और पात्रता मानदंड जारी कर दिया है."
-            },
-            {
-                title: "रेलवे भर्ती बोर्ड (RRB): ग्रुप D परीक्षा 2024 की अपडेट्स",
-                snippet: "रेलवे भर्ती बोर्ड ने ग्रुप D की परीक्षा तिथि और एडमिट कार्ड जारी करने की घोषणा की है। लाखों उम्मीदवार इस परीक्षा का बेसब्री से इंतजार कर रहे थे.",
-                fullContent: "रेलवे भर्ती बोर्ड (RRB) ने ग्रुप D की लंबित परीक्षा 2024 की तिथियों की घोषणा कर दी है। यह परीक्षा 20 अक्टूबर से 25 नवंबर तक विभिन्न चरणों में आयोजित की जाएगी। एडमिट कार्ड परीक्षा से 10 दिन पहले आधिकारिक RRB वेबसाइट पर उपलब्ध होंगे। यह उन लाखों उम्मीदवारों के लिए राहत की खबर है जिन्होंने लंबे समय से इस भर्ती का इंतजार किया है। परीक्षा का पैटर्न और सिलेबस पहले की तरह ही रहेगा, जिसमें सामान्य विज्ञान, गणित, रीजनिंग और सामान्य जागरूकता के प्रश्न शामिल होंगे."
-            }
-        ];
-
         // Functions to show/hide sections
         function showButtonsOnly() {
             buttonGridContainer.style.display = 'block';
             updatesSection.style.display = 'none';
             fullArticleContainer.style.display = 'none';
-        }
-
-        function showUpdatesSection() {
-            buttonGridContainer.style.display = 'none';
-            updatesSection.style.display = 'block';
-            fullArticleContainer.style.display = 'none';
-        }
-
-        function showFullArticle(id) {
-            buttonGridContainer.style.display = 'none';
-            updatesSection.style.display = 'none';
-            fullArticleContainer.style.display = 'block';
-            
-            const data = newsData[id];
-            articleTitle.textContent = data.title;
-            articleContent.textContent = data.fullContent;
         }
 
         function showAuthUI() {
@@ -775,45 +713,6 @@
         });
         
         logoutBtn.addEventListener('click', handleSignOut);
-        
-        // Button Grid clicks
-        document.querySelectorAll('.grid-button').forEach(button => {
-            button.addEventListener('click', (event) => {
-                const action = event.currentTarget.getAttribute('data-action');
-                if (action === 'showUpdates') {
-                    event.preventDefault(); 
-                    showUpdatesSection();
-                    // Add state to browser history for 'Latest Updates'
-                    history.pushState({ page: 'updates' }, '', 'updates');
-                }
-            });
-        });
-
-        document.querySelectorAll('.view-more-btn').forEach(button => {
-            button.addEventListener('click', (event) => {
-                const newsItem = event.target.closest('.news-item');
-                const id = newsItem.getAttribute('data-id');
-                showFullArticle(id);
-                // Add state to browser history for a specific article
-                history.pushState({ page: 'article', id: id }, '', 'article-' + id);
-            });
-        });
-        
-        // The 'Vapas Jayein' button now goes back one step in history
-        backButton.addEventListener('click', () => {
-             history.back();
-        });
-
-        // Handle browser back/forward history
-        window.addEventListener('popstate', (event) => {
-            if (event.state && event.state.page === 'updates') {
-                showUpdatesSection();
-            } else if (event.state && event.state.page === 'article') {
-                showFullArticle(event.state.id);
-            } else {
-                showButtonsOnly();
-            }
-        });
         
         window.onload = function () {
             signInWithToken();
